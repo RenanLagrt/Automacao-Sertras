@@ -206,7 +206,7 @@ def main(email,senha):
 
 
 
-# Ponto de alteração
+
 load_dotenv()
 
 email = os.getenv("EMAIL")
