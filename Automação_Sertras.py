@@ -283,101 +283,6 @@ def run_automation(email, senha, Relatorio_Sertras, documentos_rh, documentos_QS
 
 
 
-
-
-load_dotenv()
-
-email = os.getenv("EMAIL")
-senha = os.getenv("SENHA")
-
-data_atual = datetime.now().strftime("%d-%m-%Y")
-Relatorio_Sertras = f"RELATÓRIO_SERTRAS 20-02-2025.xlsx"
-
-documentos_rh = ["IDENTIFICAÇÃO",
-                "CTPS",
-                "CONTRATO DE TRABALHO",
-                "FICHA DE REGISTRO",
-                "CNH"]
-documentos_QSMS = ["ASO", 
-                "EPI", 
-                "NR10", 
-                "NR11", 
-                "NR12", 
-                "NR33", 
-                "NR35", 
-                "CERTIFICADO DE CLASSE"]
-
-diretorio_base_rh = os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", "Central de Arquivos - SERTRAS ARQUIVO PESSOAL")
-diretorio_base_qsms =  os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", "Central de Arquivos - QSMS", "000 ATUAL - OBRA 186 - INHAÚMA", "Documentação Funcionários")  
-
-mapeamento_para_documentos = {
-        "ELETRICISTA DE REPARO DE REDE DE SANEAMENTO": {
-            "IDENTIFICAÇÃO": '//*[@id="edtRequisito_Valor_1"]',
-            "CTPS": '//*[@id="edtRequisito_Valor_2"]',
-            "FICHA DE REGISTRO": '//*[@id="edtRequisito_Valor_3"]',
-            "CONTRATO DE TRABALHO": '//*[@id="edtRequisito_Valor_4"]',
-            "ASO": '//*[@id="edtRequisito_Valor_6"]',
-            "EPI": '//*[@id="edtRequisito_Valor_8"]',
-            "CERTIFICADO DE CLASSE": '//*[@id="edtRequisito_Valor_9"]',
-            "NR10": '//*[@id="edtRequisito_Valor_11"]',
-            "NR33": '//*[@id="edtRequisito_Valor_13"]',
-            "NR35": '//*[@id="edtRequisito_Valor_15"]',
-        },
-        "OPERADOR DE ESCAVADEIRA": {
-            "IDENTIFICAÇÃO": '//*[@id="edtRequisito_Valor_1"]',
-            "CTPS": '//*[@id="edtRequisito_Valor_2"]',
-            "FICHA DE REGISTRO": '//*[@id="edtRequisito_Valor_3"]',
-            "CONTRATO DE TRABALHO": '//*[@id="edtRequisito_Valor_4"]',
-            "ASO": '//*[@id="edtRequisito_Valor_6"]',
-            "EPI": '//*[@id="edtRequisito_Valor_8"]',
-            "CNH": '//*[@id="edtRequisito_Valor_10"]',
-            "NR11": '//*[@id="edtRequisito_Valor_12"]',
-        },
-        "OUTRAS": {
-            "IDENTIFICAÇÃO": '//*[@id="edtRequisito_Valor_1"]',
-            "CTPS": '//*[@id="edtRequisito_Valor_2"]',
-            "FICHA DE REGISTRO": '//*[@id="edtRequisito_Valor_3"]',
-            "CONTRATO DE TRABALHO": '//*[@id="edtRequisito_Valor_4"]',
-            "ASO": '//*[@id="edtRequisito_Valor_6"]',
-            "EPI": '//*[@id="edtRequisito_Valor_8"]',
-            "CERTIFICADO DE CLASSE": '//*[@id="edtRequisito_Valor_9"]',
-            "NR10": '//*[@id="edtRequisito_Valor_11"]',
-            "NR12": '//*[@id="edtRequisito_Valor_10"]',
-            "NR33": '//*[@id="edtRequisito_Valor_12"]',
-            "NR35": '//*[@id="edtRequisito_Valor_14"]',
-        },
-    }
-
-mapeamento_para_datas = {
-                "ELETRICISTA DE REPARO DE REDE DE SANEAMENTO" : {
-                "IDENTIFICAÇÃO" : '//*[@id="edtRequisito_Valor_0"]',
-                "ASO" : '//*[@id="edtRequisito_Valor_5"]',
-                "EPI" : '//*[@id="edtRequisito_Valor_7"]',
-                "NR10" : '//*[@id="edtRequisito_Valor_10"]',
-                "NR33" : '//*[@id="edtRequisito_Valor_12"]',
-                "NR35" : '//*[@id="edtRequisito_Valor_14"]',
-            },
-            "OPERADOR DE ESCAVADEIRA" : {
-                "IDENTIFICAÇÃO" : '//*[@id="edtRequisito_Valor_0"]',
-                "ASO" : '//*[@id="edtRequisito_Valor_5"]',
-                "EPI" : '//*[@id="edtRequisito_Valor_7"]',
-                "CNH" : '//*[@id="edtRequisito_Valor_9"]',
-                "NR11" : '//*[@id="edtRequisito_Valor_11"]',
-            },
-            "OUTRAS" : {  
-                "IDENTIFICAÇÃO" : '//*[@id="edtRequisito_Valor_0"]',
-                "ASO" : '//*[@id="edtRequisito_Valor_5"]',
-                "EPI" : '//*[@id="edtRequisito_Valor_7"]',
-                "NR11" : '//*[@id="edtRequisito_Valor_11"]',
-                "NR12" : '//*[@id="edtRequisito_Valor_9"]',
-                "NR33" : '//*[@id="edtRequisito_Valor_11"]',
-                "NR35" : '//*[@id="edtRequisito_Valor_13"]',
-    },
-}
-
-
-
-
 st.set_page_config(layout="wide")
 
 if "executado" not in st.session_state:
@@ -387,13 +292,9 @@ if "dados_processados" not in st.session_state:
     st.session_state["dados_processados"] = None
 
 # Exibição do cabeçalho
-logo_concrejato = os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", 
-                            "Central de Arquivos - QSMS", "000 ATUAL - OBRA 201 - SÃO GONÇALO", 
-                            "LOGO CONCREJATO.png")
+logo_1 = os.path.join(os.path.expanduser("~"),  "LOGO1.png")
 
-logo_consorcio = os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", 
-                            "Central de Arquivos - QSMS", "000 ATUAL - OBRA 186 - INHAÚMA", 
-                            "Logo Consórcio.jpg")
+logo_2 = os.path.join(os.path.expanduser("~"), "Logo2.jpg")
 
 col1, col2, col3 = st.columns([1, 4, 1])  
 
