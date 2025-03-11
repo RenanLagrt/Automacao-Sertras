@@ -212,4 +212,4 @@ for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
         pass
 
 if not streamlit_rodando:
-    subprocess.Popen([sys.executable, "-m", "streamlit", "run", "interface.py"], shell=True)
+    subprocess.Popen([sys.executable, "-m", "streamlit", "run", "Interface.py"], shell=True)
