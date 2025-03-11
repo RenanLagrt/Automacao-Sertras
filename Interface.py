@@ -1,33 +1,3 @@
-import os
-import re
-import io
-import sys
-import time
-import psutil 
-import subprocess
-import pytesseract
-import xml.etree.ElementTree as ET
-import pandas as pd
-import streamlit as st
-from pdf2image import convert_from_path
-from datetime import datetime
-from dotenv import load_dotenv
-from selenium import webdriver
-from openpyxl import load_workbook
-from itertools import zip_longest
-from datetime import datetime, timedelta
-from openpyxl.cell.cell import MergedCell
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from Automação_Sertras import AutomaçãoSertras, RelatórioSertras, Envio_Sertras
-
-
-
 load_dotenv()
 
 st.set_page_config(layout="wide")
@@ -37,22 +7,11 @@ senha = os.getenv("SENHA")
 
 data_atual = datetime.now().strftime("%d-%m-%Y") 
 
-documentos_rh = ["IDENTIFICAÇÃO",
-                "CTPS",
-                "CONTRATO DE TRABALHO",
-                "FICHA DE REGISTRO",
-                "CNH"]
-documentos_QSMS = ["ASO", 
-                "EPI", 
-                "NR10", 
-                "NR11", 
-                "NR12", 
-                "NR33", 
-                "NR35", 
-                "CERTIFICADO DE CLASSE"]
+documentos_rh = []
+documentos_QSMS = []
 
-diretorio_base_rh = os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", "Central de Arquivos - SERTRAS ARQUIVO PESSOAL")
-diretorio_base_qsms =  os.path.join(os.path.expanduser("~"), "CONSORCIO CONCREJATOEFFICO LOTE 1", "Central de Arquivos - QSMS", "000 ATUAL - OBRA 186 - INHAÚMA", "Documentação Funcionários")  
+diretorio_base_rh = 
+diretorio_base_qsms = 
 
 mapeamento_para_documentos = {
         "ELETRICISTA DE REPARO DE REDE DE SANEAMENTO": {
@@ -253,4 +212,4 @@ for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
         pass
 
 if not streamlit_rodando:
-    subprocess.Popen([sys.executable, "-m", "streamlit", "run", "teste.py"], shell=True)
+    subprocess.Popen([sys.executable, "-m", "streamlit", "run", "interface.py"], shell=True)
