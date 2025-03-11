@@ -83,7 +83,7 @@ class AutomaçãoSertras():
         tempo_inicio = time.time()
 
         while time.time() - tempo_inicio < timeout:
-            time.sleep(0.5)  # Pequeno atraso para evitar chamadas excessivas
+            time.sleep(0.5)  
             arquivos_atuais = set(os.listdir(diretorio_downloads))
             novos_arquivos = arquivos_atuais - arquivos_iniciais
 
@@ -124,7 +124,7 @@ class AutomaçãoSertras():
                 colunas = linha
                 is_header = False
             else:
-                if any(linha):  # Evita adicionar linhas vazias
+                if any(linha):  
                     dados.append(linha)
 
         return pd.DataFrame(dados, columns=colunas) 
